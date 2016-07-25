@@ -22,7 +22,7 @@ public class CityModel {
         void onError(String errMsg, int errCode);
     }
 
-    public void getCityData(final Listener listener) {
+    public void getCityDataByRxJava(final Listener listener) {
         Observable observable = ServiceClient.getService()
                 .getCityData()
                 //新开线程来进行网络请求
@@ -42,7 +42,7 @@ public class CityModel {
         }));
     }
 
-    public void getCityData2(final Listener listener){
+    public void getCityDataByJava(final Listener listener){
         Call<Result<CityBean>> call = ServiceClient.getService().getCityData2();
         call.enqueue(new MyNormalJavaCallBack<CityBean>(new INormalJavaCallBack<CityBean>() {
             @Override

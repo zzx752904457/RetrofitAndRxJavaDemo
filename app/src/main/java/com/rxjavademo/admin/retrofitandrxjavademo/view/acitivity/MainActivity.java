@@ -27,14 +27,14 @@ public class MainActivity extends MVPActivity<ICityView, CityPresenter> implemen
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    mPresenter.getCityData();
+                mPresenter.getCityDataByRxJava();
             }
         });
 
         tv2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.getCityData2();
+                mPresenter.getCityDataByJava();
             }
         });
     }
@@ -47,6 +47,6 @@ public class MainActivity extends MVPActivity<ICityView, CityPresenter> implemen
 
     @Override
     public void getCityDataSuccess(CityBean bean) {
-        Toast.makeText(getContext(), bean.getCountry()+"-"+bean.getArea()+"\n"+bean.getCity()+"-"+bean.getIsp(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), bean.getCountry() + "-" + bean.getArea() + "\n" + bean.getCity() + "-" + bean.getIsp(), Toast.LENGTH_SHORT).show();
     }
 }

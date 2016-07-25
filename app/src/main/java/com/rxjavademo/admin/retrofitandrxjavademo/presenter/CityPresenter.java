@@ -21,17 +21,17 @@ public class CityPresenter extends MVPPresenter<ICityView> implements CityModel.
     /**
      * 用rxJava请求城市接口数据
      */
-    public void getCityData(){
+    public void getCityDataByRxJava(){
         getView().showProgress();
-        cityModel.getCityData(this);
+        cityModel.getCityDataByRxJava(this);
     }
 
     /**
      * 用普通java请求城市接口数据
      */
-    public void getCityData2(){
+    public void getCityDataByJava(){
         getView().showProgress();
-        cityModel.getCityData2(this);
+        cityModel.getCityDataByJava(this);
     }
 
     @Override

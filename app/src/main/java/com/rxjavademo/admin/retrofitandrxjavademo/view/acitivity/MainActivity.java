@@ -13,6 +13,7 @@ import com.rxjavademo.admin.retrofitandrxjavademo.bean.CityBean;
 import com.rxjavademo.admin.retrofitandrxjavademo.presenter.CityPresenter;
 
 public class MainActivity extends MVPActivity<ICityView, CityPresenter> implements ICityView {
+    private final String ip = "202.202.32.202";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +28,14 @@ public class MainActivity extends MVPActivity<ICityView, CityPresenter> implemen
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.getCityDataByRxJava();
+                mPresenter.getCityDataByRxJava(ip);
             }
         });
 
         tv2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.getCityDataByJava();
+                mPresenter.getCityDataByJava(ip);
             }
         });
     }

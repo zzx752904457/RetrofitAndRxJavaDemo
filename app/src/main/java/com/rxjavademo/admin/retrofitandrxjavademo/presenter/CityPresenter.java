@@ -8,7 +8,7 @@ import com.rxjavademo.admin.retrofitandrxjavademo.model.CityModel;
 /**
  * Created by admin on 2016/7/25.
  */
-public class CityPresenter extends MVPPresenter<ICityView> implements CityModel.Listener{
+public class CityPresenter extends MVPPresenter<ICityView> implements CityModel.Listener {
 
 
     private CityModel cityModel;
@@ -21,17 +21,17 @@ public class CityPresenter extends MVPPresenter<ICityView> implements CityModel.
     /**
      * 用rxJava请求城市接口数据
      */
-    public void getCityDataByRxJava(){
+    public void getCityDataByRxJava(String ip) {
         getView().showProgress();
-        cityModel.getCityDataByRxJava(this);
+        cityModel.getCityDataByRxJava(ip, this);
     }
 
     /**
      * 用普通java请求城市接口数据
      */
-    public void getCityDataByJava(){
+    public void getCityDataByJava(String ip) {
         getView().showProgress();
-        cityModel.getCityDataByJava(this);
+        cityModel.getCityDataByJava(ip, this);
     }
 
     @Override

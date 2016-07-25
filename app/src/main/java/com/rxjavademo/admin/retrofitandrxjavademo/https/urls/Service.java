@@ -6,6 +6,7 @@ import com.rxjavademo.admin.retrofitandrxjavademo.bean.CityBean;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -15,11 +16,15 @@ public interface Service {
 
     String BASE_URL = "http://ip.taobao.com/";
 
-    String CITY_URL = "service/getIpInfo.php?ip=202.202.32.202";
+    String CITY_URL = "service/getIpInfo.php";
 
     @GET(CITY_URL)
-    Observable<Result<CityBean>> getCityData();
+    Observable<Result<CityBean>> getCityData(
+            @Query("ip") String ip
+    );
 
     @GET(CITY_URL)
-    Call<Result<CityBean>> getCityData2();
+    Call<Result<CityBean>> getCityData2(
+            @Query("ip") String ip
+    );
 }

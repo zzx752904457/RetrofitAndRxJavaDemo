@@ -14,17 +14,19 @@ import rx.Observable;
  */
 public interface Service {
 
+    //url: "http://ip.taobao.com/service/getIpInfo.php?ip=202.202.32.202"
+
     String BASE_URL = "http://ip.taobao.com/";
 
     String CITY_URL = "service/getIpInfo.php";
 
     @GET(CITY_URL)
-    Observable<Result<CityBean>> getCityData(
+    Observable<Result<CityBean>> getCityDataByRxJava(
             @Query("ip") String ip
     );
 
     @GET(CITY_URL)
-    Call<Result<CityBean>> getCityData2(
+    Call<Result<CityBean>> getCityDataByJava(
             @Query("ip") String ip
     );
 }

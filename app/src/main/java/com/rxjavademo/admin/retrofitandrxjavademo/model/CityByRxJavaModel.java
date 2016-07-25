@@ -16,7 +16,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by admin on 2016/7/25.
  */
-public class CityModel {
+public class CityByRxJavaModel {
     public interface Listener{
         void getDataSuccess(CityBean data);
         void onError(String errMsg, int errCode);
@@ -24,7 +24,7 @@ public class CityModel {
 
     public void getCityDataByRxJava(String ip,final Listener listener) {
         Observable observable = ServiceClient.getService()
-                .getCityData(ip)
+                .getCityDataByRxJava(ip)
                 //新开线程来进行网络请求
                 .subscribeOn(Schedulers.io())
                 //在主线程上进行响应
@@ -37,21 +37,6 @@ public class CityModel {
 
             @Override
             public void onError(String errMsg, int errCode) {
-                listener.onError(errMsg,errCode);
-            }
-        }));
-    }
-
-    public void getCityDataByJava(String ip, final Listener listener){
-        Call<Result<CityBean>> call = ServiceClient.getService().getCityData2(ip);
-        call.enqueue(new MyNormalJavaCallBack<CityBean>(new INormalJavaCallBack<CityBean>() {
-            @Override
-            public void onResponse(Call<Result<CityBean>> call, CityBean data) {
-                listener.getDataSuccess(data);
-            }
-
-            @Override
-            public void onFailure(String errMsg, int errCode) {
                 listener.onError(errMsg,errCode);
             }
         }));

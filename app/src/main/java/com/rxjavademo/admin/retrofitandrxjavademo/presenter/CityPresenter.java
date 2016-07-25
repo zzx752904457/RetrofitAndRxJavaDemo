@@ -1,20 +1,23 @@
 package com.rxjavademo.admin.retrofitandrxjavademo.presenter;
 
+import com.rxjavademo.admin.retrofitandrxjavademo.model.CityByJavaModel;
 import com.rxjavademo.admin.retrofitandrxjavademo.view.interfaces.ICityView;
 import com.rxjavademo.admin.retrofitandrxjavademo.base.MVPPresenter;
 import com.rxjavademo.admin.retrofitandrxjavademo.bean.CityBean;
-import com.rxjavademo.admin.retrofitandrxjavademo.model.CityModel;
+import com.rxjavademo.admin.retrofitandrxjavademo.model.CityByRxJavaModel;
 
 /**
  * Created by admin on 2016/7/25.
  */
-public class CityPresenter extends MVPPresenter<ICityView> implements CityModel.Listener {
+public class CityPresenter extends MVPPresenter<ICityView> implements CityByRxJavaModel.Listener,CityByJavaModel.Listener {
 
 
-    private CityModel cityModel;
+    private CityByRxJavaModel cityByRxJavaModel;
+    private CityByJavaModel cityByJavaModel;
 
     public CityPresenter() {
-        cityModel = new CityModel();
+        cityByRxJavaModel = new CityByRxJavaModel();
+        cityByJavaModel = new CityByJavaModel();
     }
 
 
@@ -23,7 +26,7 @@ public class CityPresenter extends MVPPresenter<ICityView> implements CityModel.
      */
     public void getCityDataByRxJava(String ip) {
         getView().showProgress();
-        cityModel.getCityDataByRxJava(ip, this);
+        cityByRxJavaModel.getCityDataByRxJava(ip, this);
     }
 
     /**
@@ -31,7 +34,7 @@ public class CityPresenter extends MVPPresenter<ICityView> implements CityModel.
      */
     public void getCityDataByJava(String ip) {
         getView().showProgress();
-        cityModel.getCityDataByJava(ip, this);
+        cityByJavaModel.getCityDataByJava(ip, this);
     }
 
     @Override
@@ -49,4 +52,18 @@ public class CityPresenter extends MVPPresenter<ICityView> implements CityModel.
         getView().onError(errMsg, errCode);
     }
 
+    @Override
+    public void getDataByJavaSuccess(CityBean data) {
+        //如果activity和view已经解除绑定，就不要再走activity里的回调方法
+        if (!isViewAttach()) return;
+        getView().hideProgress();
+        getView().getCityDataSuccess(data);
+    }
+
+    @Override
+    public void onFailure(String errMsg, int errCode) {
+        if (!isViewAttach()) return;
+        getView().hideProgress();
+        getView().onError(errMsg, errCode);
+    }
 }

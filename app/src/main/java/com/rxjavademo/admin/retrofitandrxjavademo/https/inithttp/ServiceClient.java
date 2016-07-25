@@ -21,24 +21,16 @@ public class ServiceClient {
 
     private static Service instance;
 
-    private static Service uploadInstance;
-
     public static Service getService(){
         if(instance == null){
-            instance = createService(false);
+            instance = createService();
         }
         return instance;
     }
 
-    public static Service getUploadService(){
-        if(uploadInstance == null){
-            uploadInstance = createService(true);
-        }
-        return uploadInstance;
-    }
 
-    private static Service createService(boolean isUpload){
-        return instance = createRetrofit(createOkHttpClient(isUpload)).create(Service.class);
+    private static Service createService(){
+        return instance = createRetrofit(createOkHttpClient()).create(Service.class);
     }
 
 
@@ -53,7 +45,7 @@ public class ServiceClient {
         return retrofit;
     }
 
-    private static OkHttpClient createOkHttpClient(final boolean isUpload){
+    private static OkHttpClient createOkHttpClient(){
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
